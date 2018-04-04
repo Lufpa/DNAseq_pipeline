@@ -14,6 +14,8 @@
 set -e
 
 date
+inDIR=/Genomics/ayroleslab/lamaya/minjiaDNA/G25N6
+outDIR=/scratch/tmp/lamaya/novaseq_gDNA
 
 # set up the number of cpus to match --cpus-per-task, this value will be use for bwa, samtools, and hapcaller
 cpus=8
@@ -25,10 +27,6 @@ r3=*Read_3*
 refbwa=/Genomics/grid/users/lamaya/genomes/dmel_genome/dmel-all-chromosome-r6.14
 refGATK=/Genomics/grid/users/lamaya/genomes/dmel_genome/dmel-all-chromosome-r6.14.fa
 
-source /Genomics/ayroleslab/lamaya/andysNdata/TEST/fq_to_varcalling.sh ${refbwa} ${refGATK} ${dedup} ${r3} ${cpus}
+source /Genomics/grid/users/lamaya/scripts/DNAseq_pipeline/DNAseq_fq_to_varcalling.sh ${refbwa} ${refGATK} ${dedup} ${cpus} ${inDIR} ${outDIR} ${r3}
 
 date
-
-
-~
-
