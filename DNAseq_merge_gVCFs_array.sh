@@ -5,7 +5,7 @@
 #SBATCH --cpus-per-task=1
 #SBATCH --output="%A_%a.out"
 #SBATCH --error="%A_%a.error"
-#SBATCH --array=5
+#SBATCH --array=1-6
 
 # run from the inDIR folder
 # requires a mygvcfiles.list with the gvcf files to merge
