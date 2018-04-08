@@ -12,13 +12,26 @@ r3=$7
 
 fqfile=`awk -v file=$SLURM_ARRAY_TASK_ID '{if (NR==file) print $0 }' $inDIR/listfiles`
 echo "filename" $fqfile >&2
-fqfile2=${fqfile%R1.fq.gz}R2.fq.gz
-name=${fqfile%.R1*}
+fqfile2=${fqfile/R1/R2}
+name=${fqfile%_S*}
 uniqfile=$name\.sorteduniq.bam
+
+#merging fq from L003 and L004. The lane info is lost given the way bwa RG
+# is set up. Can be fixed if needed, but merging cannot be done here. 
+#run bwa for each lane, merge before markduplicates
+# needs listfiles2
+fqfileL4=`awk -v file=$SLURM_ARRAY_TASK_ID '{if (NR==file) print $0 }' $inDIR/listfiles2`
+fqfileL42=${fqfileL4/R1/R2}
+
+echo "mergin fq from L003 and L004"
+infq1=${name}_R1.fq.gz
+infq2=${name}_R2.fq.gz
+cat $inDIR/$fqfile $inDIR/$fqfileL4 > $outDIR/$infq1
+cat $inDIR/$fqfile2 $inDIR/$fqfileL42 > $outDIR/$infq2
 
 date
 echo "start mapping"
-bwa mem -M -t $cpus -R "@RG\\tID:$name\\tSM:$name\\tPL:ILLUMINA\\tLB:$name" $refbwa $inDIR/$fqfile $inDIR/$fqfile2 | samtools view -u -@ $cpus | samtools sort -@ $cpus -m 3G | samtools view -F 256 -o $outDIR/$uniqfile
+bwa mem -M -t $cpus -R "@RG\\tID:$name\\tSM:$name\\tPL:ILLUMINA\\tLB:$name" $refbwa $outDIR/$infq1 $outDIR/$infq2 | samtools view -u -@ $cpus | samtools sort -@ $cpus -m 3G | samtools view -F 256 -o $outDIR/$uniqfile
 
 date
 echo "finish mapping"
