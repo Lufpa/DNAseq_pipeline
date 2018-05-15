@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --mem=40000
-#SBATCH --time=3:00:00 --qos=1day
+#SBATCH --time=4:00:00 --qos=1day
 #SBATCH --job-name=DNAseq
 #SBATCH --cpus-per-task=4   #make sure to modify $cpus too!!!
 #SBATCH --output="%A_%a.out"
@@ -28,6 +28,6 @@ r3=*Read_3*
 refbwa=/Genomics/grid/users/lamaya/genomes/dmel_genome/dmel-all-chromosome-r6.14
 refGATK=/Genomics/grid/users/lamaya/genomes/dmel_genome/dmel-all-chromosome-r6.14.fa
 
-source /Genomics/grid/users/lamaya/scripts/DNAseq_pipeline/DNAseq_fq_to_varcalling.sh ${refbwa} ${refGATK} ${dedup} ${cpus} ${inDIR} ${outDIR} ${r3}
+source /Genomics/grid/users/lamaya/scripts/DNAseq_pipeline/DNAseq_fq_to_varcalling_2lanes.sh ${refbwa} ${refGATK} ${dedup} ${cpus} ${inDIR} ${outDIR} ${r3}
 
 date
