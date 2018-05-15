@@ -1,6 +1,6 @@
 #!/bin/bash
-#SBATCH --mem=40000
-#SBATCH --time=5:00:00 --qos=1day
+#SBATCH --mem=100000
+#SBATCH --time=24:00:00 --qos=1day
 #SBATCH --job-name=Ggvcf
 #SBATCH --cpus-per-task=1
 #SBATCH --output="%A_%a.out"
@@ -14,10 +14,10 @@ set -e
 date >&2
 
 refgenome=/Genomics/grid/users/lamaya/genomes/dmel_genome/dmel-all-chromosome-r6.14.fa
-vcfout=Npop.vcf
+vcfout=bigproject_batch1.vcf
 logfile=log.genotypegvcf.${vcfout%.vcf}
-inDIR=/Genomics/ayroleslab/lamaya/Npopulation/vcfs/gvcfs
-outDIR=/Genomics/ayroleslab/lamaya/bigProject/march_2018/novaseq_gDNA
+inDIR=/scratch/tmp/lamaya/novaseq_gDNA/vcf
+outDIR=/scratch/tmp/lamaya/novaseq_gDNA/vcf
 gvcfs=$inDIR/mygvcfiles.list
 chrlist=/Genomics/grid/users/lamaya/scripts/DNAseq_pipeline/chromosomes.list
 gatk=/Genomics/grid/users/lamaya/bin/GATK/GenomeAnalysisTK.jar
