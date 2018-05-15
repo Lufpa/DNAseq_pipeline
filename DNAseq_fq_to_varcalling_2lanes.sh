@@ -31,7 +31,7 @@ cat $inDIR/$fqfile2 $inDIR/$fqfileL42 > $outDIR/$infq2
 
 date
 echo "start mapping"
-bwa mem -M -t $cpus -R "@RG\\tID:$name\\tSM:$name\\tPL:ILLUMINA\\tLB:$name" $refbwa $outDIR/$infq1 $outDIR/$infq2 | samtools view -u -@ $cpus | samtools sort -@ $cpus -m 3G | samtools view -F 256 -o $outDIR/$uniqfile
+bwa mem -M -t $cpus -R "@RG\\tID:$name\\tSM:$name\\tPL:ILLUMINA\\tLB:$name" $refbwa $outDIR/$infq1 $outDIR/$infq2 | samtools view -u -@ $cpus | samtools sort -@ $cpus -T $outDIR/$name -m 3G | samtools view -F 256 -o $outDIR/$uniqfile
 
 date
 echo "finish mapping"
