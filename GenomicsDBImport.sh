@@ -1,6 +1,6 @@
 #!/bin/bash
 
-##SBATCH parameters from core script DNAseq_merge_gVCFs_array.sh
+##SBATCH parameters from core script DNAseq_GenomicImportDB.sh
 
 gvcfs=$1
 logfile=$2

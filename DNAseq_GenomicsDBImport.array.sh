@@ -25,4 +25,5 @@ gatk=/Genomics/grid/users/lamaya/bin/gatk-4.0.5.2/gatk
 
 source /Genomics/grid/users/lamaya/scripts/DNAseq_pipeline/GenomicsDBImport.sh ${gvcfs} ${logfile} ${inDIR} ${dbpath} ${chrlist} ${gatk}
 
+
 date >&2
